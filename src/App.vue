@@ -1,28 +1,62 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <BaseLayout :is-open="isOpen">
+      <TableGrid
+        @open-info="handleOpenInfo"
+        @close-info="handleCloseInfo"
+      />
+
+      <template v-slot:info>
+        <base-info
+          :info="info"
+          @close-info="handleCloseInfo"
+        />
+      </template>
+    </BaseLayout>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import TableGrid from "./components/TableGrid";
+import BaseLayout from "./components/layouts/BaseLayout";
+import BaseInfo from "./components/BaseInfo";
 
 export default {
   name: 'app',
+  data() {
+    return {
+      isOpen: false,
+      info: null,
+    }
+  },
+  methods: {
+    handleOpenInfo(info) {
+      this.info = info;
+      this.isOpen = true;
+    },
+    handleCloseInfo() {
+      this.isOpen = false;
+      this.info = null;
+    }
+  },
   components: {
-    HelloWorld,
+    BaseInfo,
+    BaseLayout,
+    TableGrid,
   },
 };
 </script>
 
 <style lang="scss">
+body {
+  margin: 0;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin: 0;
+  height: 100vh;
 }
 </style>
