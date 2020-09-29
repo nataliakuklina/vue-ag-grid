@@ -9,6 +9,9 @@
     <p>
       Пересмотр зп: {{ info.new_salary | salaryFilter }}
     </p>
+    <p v-if="info.tags.length">
+      Теги: {{ info.tags.join(', ') }}
+    </p>
   </div>
 </template>
 
