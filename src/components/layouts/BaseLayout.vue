@@ -48,7 +48,7 @@ export default {
 
     .info {
       background: #c6f8e1;
-      flex: 400px;
+      flex: 200px;
     }
   }
 
