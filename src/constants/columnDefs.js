@@ -43,6 +43,7 @@ export default [
     headerName: 'Дельта',
     field: 'delta',
     width: 100,
+    cellRendererFramework: 'DeltaShowRow',
   },
   {
     headerName: 'Комментарий',

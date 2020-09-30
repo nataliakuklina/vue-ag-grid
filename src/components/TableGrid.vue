@@ -25,7 +25,7 @@ import TagsRow from './CustomRows/TagsRow';
 import TagsEditRow from './CustomRows/TagsEditRow';
 import CommentShowRow from './CustomRows/CommentShowRow';
 import CommentEditRow from './CustomRows/CommentEditRow';
-
+import DeltaShowRow from './CustomRows/DeltaShowRow';
 
 import columnDefs from '../constants/columnDefs';
 import rowData from '../constants/rowData';
@@ -49,6 +49,7 @@ export default {
     TagsEditRow,
     CommentShowRow,
     CommentEditRow,
+    DeltaShowRow
   },
   beforeMount() {
     this.columnDefs = columnDefs;
