@@ -9,6 +9,9 @@
                @data-model-changed="dataModelChanged"
                @selection-changed="onSelectionChanged"
                @row-selected="onRowSelected"
+
+               @cellContextMenu="onCellClicked"
+               :getContextMenuItems="getContextMenuItems"
   >
   </ag-grid-vue>
 </template>
@@ -20,6 +23,9 @@ import SalaryEditRow from './CustomRows/SalaryEditRow';
 import SalaryShowRow from './CustomRows/SalaryShowRow';
 import TagsRow from './CustomRows/TagsRow';
 import TagsEditRow from './CustomRows/TagsEditRow';
+import CommentShowRow from './CustomRows/CommentShowRow';
+import CommentEditRow from './CustomRows/CommentEditRow';
+
 
 import columnDefs from '../constants/columnDefs';
 import rowData from '../constants/rowData';
@@ -41,6 +47,8 @@ export default {
     SalaryEditRow,
     TagsRow,
     TagsEditRow,
+    CommentShowRow,
+    CommentEditRow,
   },
   beforeMount() {
     this.columnDefs = columnDefs;
@@ -68,6 +76,41 @@ export default {
     onRowSelected(event) {
       console.log(' selected = ' + event.node.selected);
     },
+    onCellClicked(event) {
+      console.log('event', event);
+    },
+    getContextMenuItems(params) {
+      return [
+        {
+          name: `Карточка сотрудника: ${params.node.data.employee}`,
+          cssClasses: [],
+          action: () => {
+            params.node.data.new_salary.status = 'discussion';
+
+            // this.$emit('open-discuss-modal', params);
+            this.$emit('open-info', params.node.data);
+          },
+        },
+        {
+          name: 'Утвердить',
+          icon: '✓',
+          cssClasses: ['green'],
+          action: () => {
+            params.node.data.new_salary.status = 'agreed';
+          },
+        },
+        {
+          name: 'Обсудить',
+          cssClasses: ['red'],
+          action: () => {
+            params.node.data.new_salary.status = 'discussion';
+
+            // this.$emit('open-discuss-modal', params);
+            this.$emit('open-info', params.node.data);
+          },
+        },
+      ]
+    }
   },
 }
 </script>
@@ -75,4 +118,11 @@ export default {
 <style lang="scss">
   @import "../../node_modules/ag-grid-community/dist/styles/ag-grid.css";
   @import "../../node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css";
+
+  .red {
+    color: red;
+  }
+  .green {
+    color: green;
+  }
 </style>

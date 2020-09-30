@@ -49,6 +49,8 @@ export default {
     .info {
       background: #c6f8e1;
       flex: 200px;
+      height: 100%;
+      overflow: auto;
     }
   }
 

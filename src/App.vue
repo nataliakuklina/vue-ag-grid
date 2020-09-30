@@ -4,6 +4,7 @@
       <TableGrid
         @open-info="handleOpenInfo"
         @close-info="handleCloseInfo"
+        @open-discuss-modal="handleOpenModal"
       />
 
       <template v-slot:info>
@@ -31,13 +32,17 @@ export default {
   },
   methods: {
     handleOpenInfo(info) {
+      console.log(info);
       this.info = info;
       this.isOpen = true;
     },
     handleCloseInfo() {
       this.isOpen = false;
       this.info = null;
-    }
+    },
+    handleOpenModal(data) {
+      console.log('data', data);
+    },
   },
   components: {
     BaseInfo,

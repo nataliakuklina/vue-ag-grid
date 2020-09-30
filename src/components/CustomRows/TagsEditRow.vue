@@ -24,7 +24,6 @@ export default {
       return this.value;
     },
 
-    // for testing
     setValue(newValue) {
       this.value = newValue;
     },
